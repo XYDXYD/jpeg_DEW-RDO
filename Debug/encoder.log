@@ -1,24 +1,22 @@
-﻿  write_jpegstream.cpp
-e:\jpeg优化\dew_op - sse\write_jpegstream.cpp(94): warning C4309: “参数”: 截断常量值
-e:\jpeg优化\dew_op - sse\write_jpegstream.cpp(108): warning C4309: “参数”: 截断常量值
-e:\jpeg优化\dew_op - sse\write_jpegstream.cpp(141): warning C4309: “参数”: 截断常量值
-e:\jpeg优化\dew_op - sse\write_jpegstream.cpp(158): warning C4309: “参数”: 截断常量值
-e:\jpeg优化\dew_op - sse\write_jpegstream.cpp(181): warning C4309: “参数”: 截断常量值
-e:\jpeg优化\dew_op - sse\write_jpegstream.cpp(240): warning C4309: “参数”: 截断常量值
-e:\jpeg优化\dew_op - sse\write_jpegstream.cpp(265): warning C4309: “参数”: 截断常量值
-e:\jpeg优化\dew_op - sse\write_jpegstream.cpp(292): warning C4309: “参数”: 截断常量值
-e:\jpeg优化\dew_op - sse\write_jpegstream.cpp(543): warning C4309: “参数”: 截断常量值
-  util.cpp
-  update_qtbl.cpp
-  fastfdct.cpp
-  encoder.cpp
-e:\jpeg优化\dew_op - sse\encoder.cpp(264): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
-e:\jpeg优化\dew_op - sse\encoder.cpp(272): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
-e:\jpeg优化\dew_op - sse\encoder.cpp(359): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
-e:\jpeg优化\dew_op - sse\encoder.cpp(236): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
-e:\jpeg优化\dew_op - sse\encoder.cpp(513): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
-  正在生成代码...
-encoder.obj : warning LNK4075: 忽略“/EDITANDCONTINUE”(由于“/SAFESEH”规范)
-  encoder.vcxproj -> E:\jpeg优化\DEW_OP - SSE\.\Debug\encoder.exe
+﻿生成启动时间为 2016/1/12 14:03:06。
+     1>项目“E:\jpeg优化\DEW_OP - SSE\encoder.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“.\Debug\encoder.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         所有输出均为最新。
+       ManifestResourceCompile:
+         所有输出均为最新。
+       Link:
+         所有输出均为最新。
+       Manifest:
+         所有输出均为最新。
+       BscMake:
+         所有输出均为最新。
+       FinalizeBuildStatus:
+         正在删除文件“.\Debug\encoder.unsuccessfulbuild”。
+         正在对“.\Debug\encoder.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“E:\jpeg优化\DEW_OP - SSE\encoder.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.04
