@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="encoder">
+</Property><Property Name="解决方案文件" Value="C:\Users\Lenovo\Desktop\DEW_OP\encoder.sln">
+</Property><Property Name="Date" Value="2016年1月3日">
+</Property><Property Name="Time" Value="10:46">
+</Property></Properties><Event ErrorLevel="0" Project="encoder" Source="encoder.vcproj" Description="Converting project file 'C:\Users\Lenovo\Desktop\DEW_OP\encoder.vcproj'.">
+</Event><Event ErrorLevel="1" Project="encoder" Source="encoder.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="encoder" Source="encoder.vcproj" Description="MSB8012: $(TargetPath) ('C:\Users\Lenovo\Desktop\DEW_OP\.\Release\encoder.exe') does not match the Linker's OutputFile property value '.\Release/encoder.exe' ('C:\Users\Lenovo\Desktop\DEW_OP\Release/encoder.exe') in project configuration 'Release|Win32'. This may cause your project to build incorrectly. To correct this, please make sure that $(TargetPath) property value matches the value specified in %(Link.OutputFile).">
+</Event><Event ErrorLevel="1" Project="encoder" Source="encoder.vcproj" Description="MSB8012: $(TargetPath) ('C:\Users\Lenovo\Desktop\DEW_OP\.\Debug\encoder.exe') does not match the Linker's OutputFile property value '.\Debug/encoder.exe' ('C:\Users\Lenovo\Desktop\DEW_OP\Debug/encoder.exe') in project configuration 'Debug|Win32'. This may cause your project to build incorrectly. To correct this, please make sure that $(TargetPath) property value matches the value specified in %(Link.OutputFile).">
+</Event><Event ErrorLevel="0" Project="encoder" Source="encoder.vcproj" Description="Done converting to new project file 'C:\Users\Lenovo\Desktop\DEW_OP\encoder.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="encoder" Source="encoder.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="encoder.sln" Description="成功转换解决方案">
+</Event><Event ErrorLevel="3" Project="" Source="encoder.sln" Description="Converted">
+</Event></UpgradeLog>
