@@ -433,7 +433,7 @@ void opti_block(int row_b, int col_b, int *dctcoef_1b, statenode *state, int *st
 
 		k = (i > 15) ? 15 : (i - 1);  // first 15 states do not have full incoming states
 
-		if (i >= c)//k=1就是把他们都不量化为0
+		if (i >= c && block_type == 1)//k=1就是把他们都不量化为0
 		{
 			k = 1;
 		}
@@ -443,7 +443,7 @@ void opti_block(int row_b, int col_b, int *dctcoef_1b, statenode *state, int *st
 			switch (indsi[i])
 			{
 			case 0:
-				for (size = 1; size < 3; size++)
+				for (size = 1; size < ((block_type == 0 || i >= c) ? 2 : 3); size++)
 				{
 					dist_inc = dist[i][j] + d[i][size];
 					cost = state[i - j - 1].min_cost + dist_inc + ent_ac[(j << 4) + size];
@@ -467,7 +467,7 @@ void opti_block(int row_b, int col_b, int *dctcoef_1b, statenode *state, int *st
 				}
 				break;
 			case 10:
-				for (size = 10; size > 8; size--)
+				for (size = 10; size > (block_type == 1 && i >=c ? 9 : 8); size--)
 				{
 					dist_inc = dist[i][j] + d[i][size];
 					cost = state[i - j - 1].min_cost + dist_inc + ent_ac[(j << 4) + size];
@@ -480,7 +480,7 @@ void opti_block(int row_b, int col_b, int *dctcoef_1b, statenode *state, int *st
 				break;
 
 			default: //2~9 
-				for (size = indsi[i] - 1; size < indsi[i] + 2; size++)
+				for (size = (block_type==1 && i >= c ? indsi[i] : indsi[i] - 1); size < indsi[i] + 2; size++)
 				{
 					dist_inc = dist[i][j] + d[i][size];
 					cost = state[i - j - 1].min_cost + dist_inc + ent_ac[(j << 4) + size];

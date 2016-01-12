@@ -1,22 +1,81 @@
-﻿生成启动时间为 2016/1/12 14:03:06。
-     1>项目“E:\jpeg优化\DEW_OP - SSE\encoder.vcxproj”在节点 2 上(build 个目标)。
+﻿生成启动时间为 2016/1/13 11:08:01。
+     1>项目“C:\Users\new\Desktop\op\DEW_OP - SSE\encoder.vcxproj”在节点 2 上(build 个目标)。
+       项目文件包含 ToolsVersion="14.0"。此工具集可能未知或缺失(您可以通过安装相应版本的 MSBuild 来解决该问题)，或者该生成因策略原因已被强制更改为特殊 ToolsVersion。将此项目视作具有 ToolsVersion="4.0"。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkId=291333。
      1>InitializeBuildStatus:
          正在创建“.\Debug\encoder.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
-         所有输出均为最新。
+         D:\软件\程序\VS\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug/" /Fd".\Debug/vc100.pdb" /FR".\Debug\\" /Gd /TP /analyze- /errorReport:prompt encoder.cpp
+         encoder.cpp
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(241): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\软件\程序\vs\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(301): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(316): warning C4258: “i”: 忽略 For 循环中的定义；使用封闭范围中的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(308) : 忽略“i”的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(89) : 使用“i”的定义
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(322): warning C4258: “i”: 忽略 For 循环中的定义；使用封闭范围中的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(308) : 忽略“i”的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(89) : 使用“i”的定义
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(326): warning C4258: “i”: 忽略 For 循环中的定义；使用封闭范围中的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(308) : 忽略“i”的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(89) : 使用“i”的定义
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(326): warning C4258: “i”: 忽略 For 循环中的定义；使用封闭范围中的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(308) : 忽略“i”的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(89) : 使用“i”的定义
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(334): warning C4258: “i”: 忽略 For 循环中的定义；使用封闭范围中的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(308) : 忽略“i”的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(89) : 使用“i”的定义
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(341): warning C4258: “i”: 忽略 For 循环中的定义；使用封闭范围中的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(308) : 忽略“i”的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(89) : 使用“i”的定义
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(347): warning C4258: “i”: 忽略 For 循环中的定义；使用封闭范围中的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(308) : 忽略“i”的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(89) : 使用“i”的定义
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(354): warning C4258: “i”: 忽略 For 循环中的定义；使用封闭范围中的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(308) : 忽略“i”的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(89) : 使用“i”的定义
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(462): warning C4258: “k”: 忽略 For 循环中的定义；使用封闭范围中的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(446) : 忽略“k”的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(89) : 使用“k”的定义
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(462): warning C4258: “k”: 忽略 For 循环中的定义；使用封闭范围中的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(446) : 忽略“k”的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(89) : 使用“k”的定义
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(462): warning C4258: “k”: 忽略 For 循环中的定义；使用封闭范围中的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(446) : 忽略“k”的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(89) : 使用“k”的定义
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(464): warning C4258: “k”: 忽略 For 循环中的定义；使用封闭范围中的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(446) : 忽略“k”的定义
+                 c:\users\new\desktop\op\dew_op - sse\encoder.cpp(89) : 使用“k”的定义
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(509): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\软件\程序\vs\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(100): warning C4101: “ad”: 未引用的局部变量
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(101): warning C4101: “y”: 未引用的局部变量
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(101): warning C4101: “x”: 未引用的局部变量
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(101): warning C4101: “n”: 未引用的局部变量
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(97): warning C4101: “th”: 未引用的局部变量
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(97): warning C4101: “tr”: 未引用的局部变量
+     1>c:\users\new\desktop\op\dew_op - sse\encoder.cpp(91): warning C4101: “inblock1”: 未引用的局部变量
        ManifestResourceCompile:
          所有输出均为最新。
        Link:
-         所有输出均为最新。
+         D:\软件\程序\VS\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug/encoder.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:".\Debug\encoder.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:".\Debug/encoder.pdb" /SUBSYSTEM:CONSOLE /STACK:"1000000000" /TLBID:1 /DYNAMICBASE:NO /IMPLIB:".\Debug\encoder.lib" /MACHINE:X86 .\Debug\encoder.exe.embed.manifest.res
+         .\Debug/encoder.obj
+         .\Debug/fastfdct.obj
+         .\Debug/update_qtbl.obj
+         .\Debug/util.obj
+         .\Debug/write_jpegstream.obj
        Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:".\Debug\encoder.exe.embed.manifest" /manifest .\Debug\encoder.exe.intermediate.manifest
          所有输出均为最新。
+       LinkEmbedManifest:
+         所有输出均为最新。
+         encoder.vcxproj -> C:\Users\new\Desktop\op\DEW_OP - SSE\.\Debug\encoder.exe
        BscMake:
-         所有输出均为最新。
+         D:\软件\程序\VS\VC\bin\bscmake.exe /nologo /o".\Debug/encoder.bsc" .\Debug\encoder.sbr .\Debug\fastfdct.sbr .\Debug\update_qtbl.sbr .\Debug\util.sbr .\Debug\write_jpegstream.sbr
        FinalizeBuildStatus:
          正在删除文件“.\Debug\encoder.unsuccessfulbuild”。
          正在对“.\Debug\encoder.lastbuildstate”执行 Touch 任务。
-     1>已完成生成项目“E:\jpeg优化\DEW_OP - SSE\encoder.vcxproj”(build 个目标)的操作。
+     1>已完成生成项目“C:\Users\new\Desktop\op\DEW_OP - SSE\encoder.vcxproj”(build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:00.04
+已用时间 00:00:02.05

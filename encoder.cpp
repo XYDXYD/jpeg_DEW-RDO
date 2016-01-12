@@ -148,10 +148,12 @@ int main(int *argc, char **argv)
 	}
 	// for(int oc=0; oc<17392;oc++)
 	//  for(k=0;k<500;k++)
+	srand(10000);
 	for (int oc = 0; oc < 36813; oc++)   //277588; 936813
 	{
 		for (k = 0;k < 100;k++)
 		{
+			
 			x1 = (int)(63 * rand()) / 32767;  	 y1 = (int)(63 * rand()) / 32767;
 
 			x2 = (int)(63 * rand()) / 32767;      y2 = (int)(63 * rand()) / 32767;
@@ -388,27 +390,27 @@ int main(int *argc, char **argv)
 								for (v = 0; v < 8; v++)
 								{
 									zz_coef[zigzag[u][v]] = abs(recon_index[aa[p][q] * 8 + u][bb[p][q] * 8 + v]);//实现块置换的地方
-									//cout << zz_coef[zigzag[u][v]] << endl;
+									//cout << zz_coef[zigzag[u][v]] << endl;h
 								}
-							Sc += zz_coef[k];
+							Sc += zz_coef[k]*zz_coef[k];
 							if (tmp_count == 31) break;
 						}
 						if (tmp_count == 31) break;
 					}
 					total_sc += Sc;
-					if (total_sc >= 20)
-					{
-						if (count / 32 % 2 == 1) //B区域
-							cc[count / 64] = min(cc[count / 64], k);
-						else
-							cc[count / 64] = k;
-						break;
-					}
-					if (k < 7)
-					{
+				}
+				if (total_sc >= 200)
+				{
+					if (count / 32 % 2 == 1) //B区域
+						cc[count / 64] = min(cc[count / 64], k);
+					else
 						cc[count / 64] = k;
-						break;
-					}
+					break;
+				}
+				if (k < 7)
+				{
+					cc[count / 64] = k;
+					break;
 				}
 			}
 			count++;
@@ -455,7 +457,7 @@ int main(int *argc, char **argv)
 				tb = a[td];
 				//cout << tb << endl;
 				//			printf("a=%d\n", a[td]);
-				if (tb == 0 && count / 32 % 2 == 0/*A区域*/ || tb == 1 && count / 32 % 2 == 1/*B区域*/)
+				if ((tb == 0 && count / 32 % 2 == 0)/*A区域*/ || (tb == 1 && count / 32 % 2 == 1)/*B区域*/)
 				{
 					for (k = cc[td]; k <= 63; k++)
 					{
@@ -547,6 +549,7 @@ int main(int *argc, char **argv)
 
 	delete wm_bit;
 
+	system("pause");
 	return 0;
 
 }
