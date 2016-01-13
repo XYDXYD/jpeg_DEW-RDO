@@ -16,13 +16,13 @@ extern void outputheader(myjpeg_compress_struct *dstinfo);
 extern void finishjpegstream();
 extern void GX_DCT_Weight_dct_8x8(int datain[8][8], int GX_DCT_1dout[8][8]);
 extern void opti_two_block();
-extern void update_qtbl();
+extern void update_qtbl(int * cc, int *block_types, int aa[][64], int bb[][64]);
 extern void jchuff_tbl(HUFF_TBL *htbl);
 //extern void block_encode(int *zz, HUFF_TBL *dctbl, HUFF_TBL *actbl);
 extern void fake_blockencode(int *zz, int *counts, int *totalpair, int *dccounts);
 extern int  customized_table(int *freq, unsigned char *returnbits, unsigned char *val);
 extern void opti_block(int row_b,  int col_b,   int *dctcoef_1b, statenode *state, int *stack, int *pointer,
-	int *counts, int *total, double *distortion_t, double *rate_total, double *cost_t, bool block_type/*0代表置零块*/, int c);
+	int *counts, int *total, double *distortion_t, double *rate_total, double *cost_t, int block_type/*0代表置零块*/, int c);
 
 
 //global variable for AC optimization
@@ -106,7 +106,8 @@ int main(int *argc, char **argv)
 	double epslon = 0.1, previouscost, distortion, rate_tle, minimumcost;
 	double c[8] = { 0.707,1.0,1.0,1.0,1.0,1.0,1.0,1.0 };
 
-	bool block_type = 1;//表示当前块是否为置零块，0表示当前块置零
+	int block_types[4096];
+	int block_type = 1;//表示当前块是否为置零块，0表示当前块置零，-1表示不嵌入信息的块
 	int cut = 63;//表示截止频率
 
 	statenode *state;
@@ -148,7 +149,7 @@ int main(int *argc, char **argv)
 	}
 	// for(int oc=0; oc<17392;oc++)
 	//  for(k=0;k<500;k++)
-	srand(10000);
+	srand(513619669);
 	for (int oc = 0; oc < 36813; oc++)   //277588; 936813
 	{
 		for (k = 0;k < 100;k++)
@@ -318,9 +319,7 @@ int main(int *argc, char **argv)
 			{
 				for (v = 0; v < 8; v++)
 				{
-
-					sigmasquare[i][j] += (abs_adct[u][v] - coe_mean)*(abs_adct[u][v] - coe_mean);
-
+					sigmasquare[i][j] += sqterm(abs_adct[u][v], coe_mean);
 				}
 			}
 			sigmasquare[i][j] = 2 * sigmasquare[i][j] / 64 + 58.5225;//每一个块的方差*2 + c2
@@ -366,7 +365,7 @@ int main(int *argc, char **argv)
 	// optimizing AC
 	ite_num = 1; // at least one iteration
 	previouscost = 0;
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////确定截止频率/////////////////////////////////////////////////////////////////
 	int count = 0; //DCT块计数器
 	for (i = 0; i < ROWS / 8; i++)
 	{
@@ -387,37 +386,56 @@ int main(int *argc, char **argv)
 							//Sc += (zz[k] * zz[k]);
 							//cout << endl;
 							for (u = 0; u < 8; u++)
+							{
 								for (v = 0; v < 8; v++)
 								{
-									zz_coef[zigzag[u][v]] = abs(recon_index[aa[p][q] * 8 + u][bb[p][q] * 8 + v]);//实现块置换的地方
+									zz_coef[zigzag[u][v]] = recon_index[aa[p][q] * 8 + u][bb[p][q] * 8 + v];//实现块置换的地方
 									//cout << zz_coef[zigzag[u][v]] << endl;h
 								}
+							}
 							Sc += zz_coef[k]*zz_coef[k];
 							if (tmp_count == 31) break;
 						}
 						if (tmp_count == 31) break;
 					}
 					total_sc += Sc;
-				}
-				if (total_sc >= 200)
-				{
-					if (count / 32 % 2 == 1) //B区域
-						cc[count / 64] = min(cc[count / 64], k);
-					else
+
+					if (total_sc >= 20)
+					{
+						if (count / 32 % 2 == 1) //B区域
+							cc[count / 64] = min(cc[count / 64], k);
+						else
+							cc[count / 64] = k;
+						break;
+					}
+					if (k < 7)
+					{
 						cc[count / 64] = k;
-					break;
-				}
-				if (k < 7)
-				{
-					cc[count / 64] = k;
-					break;
+						break;
+					}
 				}
 			}
 			count++;
 		}
 	}
-
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    。
+	////////////////////////////////////////////////存储默认量化矩阵下的，反量化后的系数。即c/Q25 * Q25////////////////////////////////////
+	int iq_index[ROWS][COLS];
+	for (i = 0; i < ROWS / 8; i++)
+	{
+		for (j = 0; j < COLS / 8; j++)
+		{
+			for (u = 0; u < 8; u++)
+			{
+				for (v = 0; v < 8; v++)
+				{
+					iq_index[i * 8 + u][j * 8 + v] = recon_index[i * 8 + u][j * 8 + v] * ori_qtbl[u][v];
+				}
+			}
+		}
+	}
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	for (;;)
 	{
 		// generate the entropy vector
@@ -454,7 +472,7 @@ int main(int *argc, char **argv)
 
 				td = count / 64;
 				//th = (tr % 2 + td % 2) % 2;
-				tb = a[td];
+				tb = (td < num_blk*wm_len) ? a[td] : -1; //如果该块没有水印要嵌入，置tb为-1
 				//cout << tb << endl;
 				//			printf("a=%d\n", a[td]);
 				if ((tb == 0 && count / 32 % 2 == 0)/*A区域*/ || (tb == 1 && count / 32 % 2 == 1)/*B区域*/)
@@ -464,6 +482,17 @@ int main(int *argc, char **argv)
 						zz_coef[k] = 0;
 					}
 					block_type = 0;
+					block_types[count] = 0;
+				}
+				else if ((tb == 0 && count / 32 % 2 == 1)/*A区域*/ || (tb == 1 && count / 32 % 2 == 0)/*B区域*/)
+				{
+					block_type = 1; //该块是非置零块
+					block_types[count] = 1;
+				}
+				else
+				{
+					block_type = -1; //该块不嵌入信息
+					block_types[count] = -1;
 				}
 				/*for (u = 0; u < 8; u++)
 				{
@@ -493,8 +522,53 @@ int main(int *argc, char **argv)
 			break;
 		previouscost = minimumcost;
 		//update the quantization table 
-		update_qtbl();
+		update_qtbl(cc, block_types, aa, bb);
+		
 	}
+
+	///////////////////////////////////////////每一个块新的反量化值要不小于默认量化矩阵下的反量化值/////////////////////////////////////////////////////
+	int tmp_zz_coef1[64], tmp_zz_coef2[64];
+	count = 0; //DCT块计数器
+	int error_count = 0;
+	for (i = 0; i < ROWS / 8; i++)
+	{
+		for (j = 0; j < COLS / 8; j++)
+		{
+			td = count / 64;
+			tb = (td < num_blk*wm_len) ? a[td] : -1; //如果该块没有水印要嵌入，置tb为-1
+			for (u = 0; u < 8; u++)
+				for (v = 0; v < 8; v++)
+				{
+					tmp_zz_coef1[zigzag[u][v]] = recon_index[aa[i][j] * 8 + u][bb[i][j] * 8 + v];
+					tmp_zz_coef2[zigzag[u][v]] = iq_index[aa[i][j] * 8 + u][bb[i][j] * 8 + v];
+				}
+			if ((tb == 0 && count / 32 % 2 == 0)/*A区域*/ || (tb == 1 && count / 32 % 2 == 1)/*B区域*/)
+			{//置零块
+				for (int ii = cc[count / 64]; ii < 64; ii++)
+				{
+					if (tmp_zz_coef1[ii] != 0)
+						cout << "置零块粗大事了" << endl;
+				}
+			}
+			else if ((tb == 0 && count / 32 % 2 == 1)/*A区域*/ || (tb == 1 && count / 32 % 2 == 0)/*B区域*/)
+			{//该块是非置零块
+				int accu_before = 0, accu_after = 0;
+				for (int ii = cc[count / 64]; ii < 64; ii++)
+				{
+					accu_before += sqr(tmp_zz_coef2[ii]);
+					accu_after += sqr(tmp_zz_coef1[ii] * qtbl_1d[ii]);
+				}
+				if (accu_before > accu_after)
+				{
+					cout << "粗大事了" << endl;
+					error_count++;
+					cout << error_count << endl;
+				}
+			}
+			count++;
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// end=clock();
 	pairnum_0 = customized_table(dc_counts, dc_bits_0, dc_val_0);

@@ -11,7 +11,8 @@ double tempd;
 extern double ent_dc[12];						  // entropy of DC size group
 extern double ent_ac[256];						  // entropy of each (r,s) pair
 
-double maxnumber = DBL_MAX;
+const double maxnumber = DBL_MAX;
+const double big_num = maxnumber / 16; //一个大数，让不该置零的系数置零后的代价很大
 
 /* gloabl variables */
 extern long huff_put_buffer; /* buffer for accumulating the current bits */
@@ -345,7 +346,7 @@ void search_min_cost(statenode* state_a0, statenode* state_b0, int i, int j)
 //optimize each 8x8 block independently 
 //(aa[i][j], bb[i][j], zz_coef, state, stack/*64个int*/, &point/*空*/, ac_counts/*全零*/, &total/*totalpair*/, &distortion, &rate_tle, &minimumcost)
 void opti_block(int row_b, int col_b, int *dctcoef_1b, statenode *state, int *stack, int *pointer,
-	int *counts, int *total, double *distortion_t, double *rate_total, double *cost_t, bool block_type, int c)
+	int *counts, int *total, double *distortion_t, double *rate_total, double *cost_t, int block_type, int c)
 {
 	register int i, j, k, size;
 	int sp;
@@ -376,11 +377,29 @@ void opti_block(int row_b, int col_b, int *dctcoef_1b, statenode *state, int *st
 
 	// calculate the different distortion (squared error) for current block
 	for (i = 2; i < 16; i++)     // for i=2~15
+	{
 		for (j = 1; j < i; j++)   // for j=1~(i-1)
-			dist[i][j] = dist[i][j - 1] + sqr(c_abs[i - j]);//计算每个路径的代价
+		{
+			if (block_type == 1 && i - j >= c && c_abs[i - j] != 0)//非置零块的c后的系数，如果非零，不得置为零
+			{
+				dist[i][j] = dist[i][j - 1] + big_num;
+			}
+			else
+				dist[i][j] = dist[i][j - 1] + sqr(c_abs[i - j]);//计算每个路径的代价
+		}
+	}
 	for (i = 16; i < 64; i++)    // for i=16~63
+	{
 		for (j = 1; j < 16; j++)  // for j=1~15
-			dist[i][j] = dist[i][j - 1] + sqr(c_abs[i - j]);
+		{
+			if (block_type == 1 && i - j >= c && c_abs[i - j] != 0)//非置零块的c后的系数，如果非零，不得置为零
+			{
+				dist[i][j] = dist[i][j - 1] + big_num;
+			}
+			else
+				dist[i][j] = dist[i][j - 1] + sqr(c_abs[i - j]);//计算每个路径的代价
+		}
+	}
 
 	// calculate d1(i,s) and id(i,s)
 	for (i = 1; i < 64; i++)
@@ -427,16 +446,12 @@ void opti_block(int row_b, int col_b, int *dctcoef_1b, statenode *state, int *st
 	}
 	// for each state i (1~63), find the minimum cost to this state
 	//cout << block_type << endl;
-	for (i = 1; i <= (block_type == 0 ? 63 : 63); i++)
+	for (i = 1; i < 64; i++)
 	{
 		curr_min = maxnumber;   // initialized for each new state
 
 		k = (i > 15) ? 15 : (i - 1);  // first 15 states do not have full incoming states
 
-		if (i >= c && block_type == 1)//k=1就是把他们都不量化为0
-		{
-			k = 1;
-		}
 		// for each incoming state j (j is from 0 to maximum incoming states)
 		for (j = 0; j <= k; j++)
 		{
@@ -496,7 +511,7 @@ void opti_block(int row_b, int col_b, int *dctcoef_1b, statenode *state, int *st
 		} // end of j loop for each one incoming state  
 
 	  // for each state, find the cost of going EOB after this nonzero state
-		if (i < block_type == 0 ? c : 63)
+		if (i < (block_type == 0 ? c : 63))
 		{
 			ending_cost[i] = state[i].min_cost + eob_cost[i];
 			if (ending_cost[i] < ending_cost[final_nzc])
