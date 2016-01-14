@@ -1,3 +1,14 @@
-﻿  update_qtbl.cpp
-e:\jpeg优化\dew_op - sse\update_qtbl.cpp(35): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+﻿  encoder.cpp
+e:\jpeg优化\dew_op - sse\encoder.cpp(302): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+e:\jpeg优化\dew_op - sse\encoder.cpp(242): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
+e:\jpeg优化\dew_op - sse\encoder.cpp(583): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
+e:\jpeg优化\dew_op - sse\encoder.cpp(97): warning C4101: “th”: 未引用的局部变量
+e:\jpeg优化\dew_op - sse\encoder.cpp(100): warning C4101: “ad”: 未引用的局部变量
+e:\jpeg优化\dew_op - sse\encoder.cpp(101): warning C4101: “y”: 未引用的局部变量
+e:\jpeg优化\dew_op - sse\encoder.cpp(97): warning C4101: “tr”: 未引用的局部变量
+e:\jpeg优化\dew_op - sse\encoder.cpp(101): warning C4101: “x”: 未引用的局部变量
+e:\jpeg优化\dew_op - sse\encoder.cpp(101): warning C4101: “n”: 未引用的局部变量
+e:\jpeg优化\dew_op - sse\encoder.cpp(91): warning C4101: “inblock1”: 未引用的局部变量
   encoder.vcxproj -> E:\jpeg优化\DEW_OP - SSE\.\Debug\encoder.exe

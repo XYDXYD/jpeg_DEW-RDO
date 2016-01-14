@@ -389,7 +389,7 @@ int main(int *argc, char **argv)
 							{
 								for (v = 0; v < 8; v++)
 								{
-									zz_coef[zigzag[u][v]] = recon_index[aa[p][q] * 8 + u][bb[p][q] * 8 + v];//实现块置换的地方
+									zz_coef[zigzag[u][v]] = adct[aa[p][q] * 8 + u][bb[p][q] * 8 + v];//实现块置换的地方
 									//cout << zz_coef[zigzag[u][v]] << endl;h
 								}
 							}
@@ -400,7 +400,7 @@ int main(int *argc, char **argv)
 					}
 					total_sc += Sc;
 
-					if (total_sc >= 20)
+					if (total_sc >= 70000)
 					{
 						if (count / 32 % 2 == 1) //B区域
 							cc[count / 64] = min(cc[count / 64], k);
@@ -410,7 +410,7 @@ int main(int *argc, char **argv)
 					}
 					if (k < 7)
 					{
-						cc[count / 64] = k;
+						cc[count / 64] = k;	
 						break;
 					}
 				}
@@ -547,7 +547,7 @@ int main(int *argc, char **argv)
 				for (int ii = cc[count / 64]; ii < 64; ii++)
 				{
 					if (tmp_zz_coef1[ii] != 0)
-						cout << "置零块粗大事了" << endl;
+						cout << "置零块中的零变成非零了" << endl;  //置零块不能变成非零
 				}
 			}
 			else if ((tb == 0 && count / 32 % 2 == 1)/*A区域*/ || (tb == 1 && count / 32 % 2 == 0)/*B区域*/)
@@ -558,11 +558,11 @@ int main(int *argc, char **argv)
 					accu_before += sqr(tmp_zz_coef2[ii]);
 					accu_after += sqr(tmp_zz_coef1[ii] * qtbl_1d[ii]);
 				}
-				if (accu_before > accu_after)
+				if (accu_before > accu_after || accu_before == 0)
 				{
-					cout << "粗大事了" << endl;
+					cout << "非置零块中的截止频率以上的能量变小了" << endl;
 					error_count++;
-					cout << error_count << endl;
+					cout << error_count << "差值为" << accu_before - accu_after << endl; //
 				}
 			}
 			count++;
