@@ -3,7 +3,7 @@ joint watermark and rate distortion optimization of jpeg image
 
 
 
-[1]	G. C. Langelaar and R. L. Lagendijk, "Optimal differential energy watermarking of DCT encoded images and video," Ieee Transactions on Image Processing, vol. 10, pp. 148-158, Jan 2001.
+[1]	G. C. Langelaar and R. L. Lagendijk, "Optimal differential energy watermarking of DCT encoded images and video," IEEE Transactions on Image Processing, vol. 10, pp. 148-158, Jan 2001.
 
 
 
